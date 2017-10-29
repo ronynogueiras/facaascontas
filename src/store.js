@@ -1,0 +1,40 @@
+/* eslint no-param-reassign: ["error", { "props": false }] */
+import Vue from 'vue';
+import Vuex from 'vuex';
+
+Vue.use(Vuex);
+
+export default new Vuex.Store({
+  modules: {
+    splitter: {
+      namespaced: true,
+      state: {
+        open: false,
+      },
+      mutations: {
+        toggle(state, shouldOpen) {
+          if (typeof shouldOpen === 'boolean') {
+            state.open = shouldOpen;
+          } else {
+            state.open = !state.open;
+          }
+        },
+      },
+    },
+    fab: {
+      namespaced: true,
+      state: {
+        show: false,
+      },
+      mutations: {
+        toggle(state, show) {
+          if (typeof show === 'boolean') {
+            state.show = show;
+          } else {
+            state.show = !state.show;
+          }
+        },
+      },
+    },
+  },
+});
