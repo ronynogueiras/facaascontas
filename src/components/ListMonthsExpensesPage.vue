@@ -6,7 +6,7 @@
           Meses
         </div>
       </v-ons-list-header>
-      <v-ons-list-item tappable v-for="item in 12" :key="item" @click.prevent="$router.push({name: 'list_expenses', params: { month: '10', year: 2017}})">
+      <v-ons-list-item tappable v-for="item in 12" :key="item" @click.prevent="$router.push({name: 'list_expenses', params: { month: '10', year: 2017}})" modifier="chevron">
         <v-ons-row>
           <v-ons-col width="60%">Outubro 2017</v-ons-col>
           <v-ons-col>R$100,00</v-ons-col>
