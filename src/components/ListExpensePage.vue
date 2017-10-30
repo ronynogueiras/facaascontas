@@ -26,8 +26,8 @@
       <v-ons-list-item v-for="(item, index) in expenses" :key="item.id" tappable @click.prevent="showDialogOptions(index)">
         <v-ons-row>
           <v-ons-col width="10%"><v-ons-icon :icon="item.paid ? 'ion-checkmark-round' : 'ion-close-round'"></v-ons-icon></v-ons-col>
-          <v-ons-col width="60%">{{ item.description }}</v-ons-col>
-          <v-ons-col class="text-right">
+          <v-ons-col width="60%">{{ item.description }}<br><small>{{ item.due_date }}</small></v-ons-col>
+          <v-ons-col class="text-right" vertical-align="center">
               {{ item.value | money }}
           </v-ons-col>
         </v-ons-row>
@@ -90,14 +90,16 @@ export default {
       expenses: [
         {
           id: 1,
-          value: 100,
+          value: 100.11,
           paid: false,
+          due_date: '30/10/2017',
           description: 'Despesa',
         },
         {
           id: 2,
-          value: 102,
-          paid: false,
+          value: 102.12,
+          paid: true,
+          due_date: '31/10/2017',
           description: 'Despesa',
         },
       ],
