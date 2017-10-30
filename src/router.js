@@ -40,6 +40,12 @@ const router = new Router({
       name: 'new_expense',
       component: load('ManagerExpensePage'),
     },
+    {
+      path: '/editar/:id',
+      name: 'edit_expense',
+      props: true,
+      component: load('ManagerExpensePage'),
+    },
   ],
 });
 
