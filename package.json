@@ -12,6 +12,7 @@
     "lint": "eslint --ext .js,.vue src"
   },
   "dependencies": {
+    "dexie": "^2.0.1",
     "numeral": "^2.0.6",
     "onsenui": "~2.6.1",
     "v-money": "^0.8.1",

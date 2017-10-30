@@ -8,10 +8,12 @@ import store from './store';
 import router from './router';
 import App from './App';
 import './filters/finance';
+import db from './db';
 
 Vue.config.productionTip = false;
 
 Vue.use(VueOnsen);
+Vue.prototype.$db = db;
 
 /* eslint-disable no-new */
 new Vue({
