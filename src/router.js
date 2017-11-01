@@ -19,11 +19,6 @@ const router = new Router({
       component: load('HomePage'),
     },
     {
-      path: '/despesa',
-      name: 'exchange',
-      component: load('ExchangePage'),
-    },
-    {
       path: '/despesas/:month/:year',
       name: 'list_expenses',
       props: true,
