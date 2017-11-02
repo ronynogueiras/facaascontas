@@ -3,11 +3,11 @@
     <h1 class="text-center">Minhas Despesas</h1>
     <v-ons-card>
       <div class="title">
-        Outubro 2017
+        {{ currentMonthName }}
       </div>
       <div class="content">
-        <h1>R$300,00</h1>
-        <v-ons-button modifier="large" style="margin: 6px 0" @click.prevent="$router.push({name: 'list_expenses', params: { month: '10', year: 2017}})">Ver despesas</v-ons-button>
+        <h1>{{ currentExpense | money }} </h1>
+        <v-ons-button modifier="large" style="margin: 6px 0" @click.prevent="$router.push({name: 'list_expenses', params: { month: currentMonth }})">Ver despesas</v-ons-button>
       </div>
     </v-ons-card>
     <v-ons-card>
@@ -15,7 +15,7 @@
         Próximos Meses
       </div>
       <div class="content">
-        <h1>R$600,00</h1>
+        <h1>{{ nextExpenses | money }}</h1>
         <v-ons-button modifier="large" style="margin: 6px 0" @click.prevent="$router.push({name: 'list_months_expenses'})">Ver despesas</v-ons-button>
       </div>
     </v-ons-card>
@@ -23,16 +23,48 @@
 </template>
 
 <script>
+import months from '@/util/months';
+
+const now = new Date();
+
 export default {
   name: 'home',
   data() {
-    return { };
+    return {
+      currentMonth: `${now.getFullYear()}-${now.getMonth() + 1 < 10 ? '0' : ''}${now.getMonth() + 1}`,
+      currentExpense: 0.0,
+      nextExpenses: 0.0,
+    };
   },
-  created() {
-    this.$store.commit('fab/toggle', true);
+  methods: {
+    getCurrentMonth() {
+      this.$db.expenses.where('due_date').startsWith(this.currentMonth).toArray((arr) => {
+        this.currentExpense = arr.reduce((total, current) => total + parseFloat(current.value), 0);
+      });
+    },
+    getNextMonths() {
+      let month = now.getMonth() + 1;
+      let year = now.getFullYear();
+      if (month === 12) {
+        month = '01';
+        year += 1;
+      }
+      const greaterThan = new Date(year, month);
+      this.$db.expenses
+      .filter(item => new Date(item.due_date).getTime() > greaterThan.getTime())
+      .toArray((arr) => {
+        this.nextExpenses = arr.reduce((total, current) => total + parseFloat(current.value), 0);
+      });
+    },
   },
-  destroyed() {
-    this.$store.commit('fab/toggle', false);
+  computed: {
+    currentMonthName() {
+      return `${months[now.getMonth()].name} ${now.getFullYear()}`;
+    },
+  },
+  mounted() {
+    this.getCurrentMonth();
+    this.getNextMonths();
   },
 };
 </script>
