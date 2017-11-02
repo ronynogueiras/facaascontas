@@ -2,11 +2,14 @@
   <v-ons-page id="app">
     <v-ons-toolbar class="home-toolbar">
       <div class="left">
+        <v-ons-toolbar-button @click.prevent="$router.push({name: 'home'})">
+          <v-ons-icon icon="ion-home"></v-ons-icon>
+        </v-ons-toolbar-button>
       </div>
       <div class="center">Faça as Contas</div>
       <div class="right">
         <v-ons-toolbar-button @click.prevent="$router.push({ name: 'new_expense' })">
-          <v-ons-icon icon="md-plus"></v-ons-icon>
+          <v-ons-icon icon="ion-plus-circled"></v-ons-icon>
         </v-ons-toolbar-button>
       </div>
     </v-ons-toolbar>
