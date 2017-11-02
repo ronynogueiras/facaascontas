@@ -19,7 +19,7 @@ const router = new Router({
       component: load('HomePage'),
     },
     {
-      path: '/despesas/:month/:year',
+      path: '/mes/:month',
       name: 'list_expenses',
       props: true,
       component: load('ListExpensePage'),
